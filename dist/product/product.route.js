@@ -1,0 +1,22 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.productRouter = void 0;
+const express_1 = __importDefault(require("express"));
+const product_controller_1 = __importDefault(require("./product.controller"));
+const multer_1 = __importDefault(require("multer"));
+const storage = multer_1.default.memoryStorage();
+const upload = (0, multer_1.default)({ storage: storage });
+const router = (0, express_1.default)();
+exports.productRouter = router;
+const productService = new product_controller_1.default();
+router.get('/productlist', productService.getProducts);
+router.post('/create', productService.createProduct);
+router.get('/out-of-stock', productService.getOutOfStockProduct);
+router.put('/:id/mark-as-verified', productService.markVerified);
+router.delete('/:id/delete', productService.deleteProduct);
+router.get('/:id', productService.getProduct);
+router.put('/:id/update', productService.updateProduct);
+router.post('/upload-product', upload.single('file'), productService.uploadProduct);

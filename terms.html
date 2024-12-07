@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Terms and Conditions</title>
+  <style>
+    /* Add any necessary styling here */
+  </style>
+</head>
+<body>
+  <h1>Terms and Conditions</h1>
+  <p>Please read and accept the terms and conditions to continue using the application.</p>
+  <!-- Add terms content here -->
+  <button id="accept-btn">Accept</button>
+
+  <script>
+    document.getElementById('accept-btn').addEventListener('click', () => {
+      localStorage.setItem('acceptedTerms', 'true'); // Saves acceptance in local storage
+      window.close(); // Close the terms window
+      window.opener.postMessage({ accepted: true }, '*'); // Send acceptance message to main window
+    });
+  </script>
+</body>
+</html>
